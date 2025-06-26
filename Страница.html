@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея</title>
+    <style>
+        .gallery {
+            position: relative;
+            width: 90%;
+            height: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .gallery-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item {
+            min-width: 100%;
+            height: 100%;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        
+        .gallery-btn {
+            background-color: #808080; /* Серый цвет */
+            color: white;
+            border: none;
+            width: 40px;
+            height: 60px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .gallery-btn:hover {
+            background-color: #c0c0c0; /* Светло-серый при наведении */
+        }
+        
+        .gallery-btn-prev {
+	    border-radius: 5px 0 0 5px;            
+        }
+        
+        .gallery-btn-next {
+            border-radius:  0 5px 5px 0; 
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="https://yadi.sk/i/aj30ChnNXPE-tA/d/&dl=1" alt="фото 1">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x400/33ff57/ffffff?text=Фото+2" alt="Фото 2">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x400/3357ff/ffffff?text=Фото+3" alt="Фото 3">
+            </div>
+        </div>
+        
+        <div class="gallery-controls">
+            <button class="gallery-btn gallery-btn-prev">‹</button>
+            <button class="gallery-btn gallery-btn-next">›</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.gallery-container');
+            const items = document.querySelectorAll('.gallery-item');
+            const prevBtn = document.querySelector('.gallery-btn-prev');
+            const nextBtn = document.querySelector('.gallery-btn-next');
+            let currentIndex = 0;
+            const itemCount = items.length;
+            
+            function updateGallery() {
+                container.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+            
+            prevBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : itemCount - 1;
+                updateGallery();
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex < itemCount - 1) ? currentIndex + 1 : 0;
+                updateGallery();
+            });
+        });
+    </script>
+</body>
+</html>
